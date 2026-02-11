@@ -99,7 +99,8 @@
 <input type="text" id="promiseInput" placeholder="Type your promise here...">
 <br>
 <button onclick="submitPromise()">Submit 💌</button>
-
+<br><br>
+<button onclick="clearPromises()">Clear All 💔</button>
 <div class="wall" id="promiseWall"></div>
 
 <!-- YouTube Music Embed (Muted at start) -->
@@ -154,7 +155,10 @@ frameborder="0" allow="autoplay; encrypted-media"></iframe>
     `;
     document.getElementById("promiseWall").prepend(card);
   });
-
+function clearPromises() {
+  database.ref("promises").remove();
+  document.getElementById("promiseWall").innerHTML = "";
+}
   setInterval(() => {
     const heart = document.createElement("div");
     heart.className = "heart";
