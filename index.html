@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Promise Wall 💖</title>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to right, #ff9a9e, #fad0c4);
+      text-align: center;
+      padding: 30px;
+    }
+
+    h1 {
+      color: white;
+    }
+
+    input {
+      padding: 10px;
+      width: 60%;
+      border-radius: 20px;
+      border: none;
+      margin: 10px;
+    }
+
+    button {
+      padding: 10px 20px;
+      border-radius: 20px;
+      border: none;
+      background: white;
+      cursor: pointer;
+    }
+
+    .wall {
+      margin-top: 30px;
+    }
+
+    .card {
+      background: white;
+      padding: 15px;
+      margin: 10px auto;
+      width: 70%;
+      border-radius: 15px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    .reply {
+      color: #ff4e8a;
+      font-weight: bold;
+      margin-top: 8px;
+    }
+  </style>
+</head>
+<body>
+
+<h1>💖 Promise Day Wall 💖</h1>
+
+<input type="text" id="promiseInput" placeholder="Type your promise here...">
+<br>
+<button onclick="submitPromise()">Submit 💌</button>
+
+<div class="wall" id="promiseWall"></div>
+
+<script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database-compat.js"></script>
+
+<script>
+  const firebaseConfig = {
+    apiKey: "AIzaSyBdhCvvDTncRXlxSEIWeyOzCBfnC2BOT5c",
+    authDomain: "promise-wall.firebaseapp.com",
+    databaseURL: "https://promise-wall-default-rtdb.firebaseio.com/",
+    projectId: "promise-wall",
+    storageBucket: "promise-wall.firebasestorage.app",
+    messagingSenderId: "842979976551",
+    appId: "1:842979976551:web:d5ad8efe9584c7a325fbc2"
+  };
+
+  firebase.initializeApp(firebaseConfig);
+  const database = firebase.database();
+</script>
+  const replies = [
+    "Promise locked in my heart 💖",
+    "Okay… don’t break it 😌",
+    "Accepted officially 💌",
+    "Now you can’t take it back 😏",
+    "I trust you with this 🥺✨",
+    "Forever noted 💞"
+  ];
+
+ function submitPromise() {
+    const input = document.getElementById("promiseInput");
+    const text = input.value;
+
+    if (text.trim() === "") return;
+
+    const randomReply = replies[Math.floor(Math.random() * replies.length)];
+
+    database.ref("promises").push({
+      message: text,
+      reply: randomReply
+    });
+
+    input.value = "";
+  }
+
+  database.ref("promises").on("child_added", function(snapshot) {
+    const data = snapshot.val();
+
+    const card = document.createElement("div");
+    card.className = "card";
+
+    card.innerHTML = `
+      💌 ${data.message}
+      <div class="reply">🌸 ${data.reply}</div>
+    `;
+
+    document.getElementById("promiseWall").prepend(card);
+  });
+</script>
+</body>
+</html>
