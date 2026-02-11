@@ -2,8 +2,11 @@
 <html>
 <head>
   <title>Promise Wall 💖</title>
-  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js"></script>
+
+  <!-- Firebase scripts -->
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database-compat.js"></script>
+
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -12,9 +15,7 @@
       padding: 30px;
     }
 
-    h1 {
-      color: white;
-    }
+    h1 { color: white; }
 
     input {
       padding: 10px;
@@ -32,9 +33,7 @@
       cursor: pointer;
     }
 
-    .wall {
-      margin-top: 30px;
-    }
+    .wall { margin-top: 30px; }
 
     .card {
       background: white;
@@ -52,6 +51,7 @@
     }
   </style>
 </head>
+
 <body>
 
 <h1>💖 Promise Day Wall 💖</h1>
@@ -63,10 +63,7 @@
 <div class="wall" id="promiseWall"></div>
 
 <script>
-<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database-compat.js"></script>
-
-<script>
+  // Firebase config
   const firebaseConfig = {
     apiKey: "AIzaSyBdhCvvDTncRXlxSEIWeyOzCBfnC2BOT5c",
     authDomain: "promise-wall.firebaseapp.com",
@@ -79,6 +76,7 @@
 
   firebase.initializeApp(firebaseConfig);
   const database = firebase.database();
+
   const replies = [
     "Promise locked in my heart 💖",
     "Okay… don’t break it 😌",
@@ -88,7 +86,7 @@
     "Forever noted 💞"
   ];
 
- function submitPromise() {
+  function submitPromise() {
     const input = document.getElementById("promiseInput");
     const text = input.value;
 
@@ -118,5 +116,6 @@
     document.getElementById("promiseWall").prepend(card);
   });
 </script>
+
 </body>
 </html>
